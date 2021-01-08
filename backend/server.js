@@ -6,11 +6,21 @@ const router = require('./router');
 
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server);
+const io = socketio(server, {
+  cors: {
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
+  },
+});
 const PORT = process.env.PORT || 5000;
 
 io.on('connection', socket => {
   console.log('a new user is connected');
+
+  socket.on('join', ({ name, room }, callback) => {
+    console.log(name, room);
+  });
+
   socket.on('disconnect', () => console.log('a user has just left'));
 });
 
