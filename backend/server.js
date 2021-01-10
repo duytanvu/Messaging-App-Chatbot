@@ -2,6 +2,8 @@ const express = require('express');
 const socketio = require('socket.io');
 const http = require('http');
 const cors = require('cors');
+const axios = require('axios').default;
+require('dotenv').config();
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 const router = require('./router');
@@ -49,6 +51,71 @@ io.on('connection', socket => {
   socket.on('sendMessage', (message, callback) => {
     const user = getUser(socket.id);
 
+    const subString = message.split(' ');
+
+    if (subString[0] === '!covid') {
+      axios
+        .get('https://api.covid19tracker.ca/summary')
+        .then(({ data }) => {
+          io.to(user.room).emit('message', {
+            isChatbot: true,
+            botData: 'covid',
+            user: user.name,
+            text: JSON.stringify(data),
+          });
+        })
+        .catch(err => {
+          io.to(user.room).emit('message', {
+            isChatbot: true,
+            user: user.name,
+            text: 'Error - cannot fetch latest data about covid-19 right now.',
+          });
+        });
+    } else if (subString[0] === '!stock') {
+      const symbol = subString[1];
+      axios
+        .get(
+          `https://financialmodelingprep.com/api/v3/profile/${symbol}?apikey=${process.env.FINANCIAL_MODELING_PREP_API_KEY}`
+        )
+        .then(({ data }) => {
+          io.to(user.room).emit('message', {
+            isChatbot: true,
+            botData: 'stock',
+            user: user.name,
+            text: JSON.stringify(data),
+          });
+        })
+        .catch(err => {
+          io.to(user.room).emit('message', {
+            isChatbot: true,
+            user: user.name,
+            text:
+              'Error - cannot fetch latest data about stock market right now.',
+          });
+        });
+    } else if (subString[0] === '!weather') {
+      const city = subString[1];
+      axios
+        .get(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.OPEN_WEATHER_MAP_API_KEY}&units=metric`
+        )
+        .then(({ data }) => {
+          io.to(user.room).emit('message', {
+            isChatbot: true,
+            botData: 'weather',
+            user: user.name,
+            text: JSON.stringify(data),
+          });
+        })
+        .catch(err => {
+          io.to(user.room).emit('message', {
+            isChatbot: true,
+            user: user.name,
+            text:
+              'Error - cannot fetch latest data about weather forecast right now.',
+          });
+        });
+    }
     io.to(user.room).emit('message', { user: user.name, text: message });
 
     callback();

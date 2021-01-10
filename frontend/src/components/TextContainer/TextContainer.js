@@ -19,10 +19,28 @@ const TextContainer = ({ users }) => (
           ❤️
         </span>
       </h2>
+      <h2>Check our chatbot out!</h2>
+      <div>
+        <p>
+          <em>Usage:</em> <u>!command &lt;option&gt;</u>
+        </p>
+        <p>
+          <strong>!covid</strong> | Get the latest update about Covid-19 in
+          Canada
+        </p>
+        <p>
+          <strong>!stock &lt;symbol&gt;</strong> | Get the latest market update
+          about a company with stock symbol
+        </p>
+        <p>
+          <strong>!weather &lt;city&gt;</strong> | Get the latest weather
+          forecast of a city
+        </p>
+      </div>
     </div>
     {users ? (
       <div>
-        <h1>Who are online: </h1>
+        <h1>People online: </h1>
         <div className='activeContainer'>
           <h2>
             {users.map(({ name }) => (
