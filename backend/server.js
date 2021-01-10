@@ -44,7 +44,22 @@ io.on('connection', socket => {
     callback();
   });
 
-  socket.on('disconnect', () => console.log('a user has just left'));
+  socket.on('disconnect', () => {
+    const user = removeUser(socket.id);
+
+    if (user) {
+      io.to(user.room).emit('message', {
+        user: 'Admin',
+        text: `${user.room} has left the room.`,
+      });
+
+      io.to(user.room).emit('roomData'),
+        {
+          room: user.room,
+          user: getUserInRoom(user.room),
+        };
+    }
+  });
 });
 
 app.use(router);
