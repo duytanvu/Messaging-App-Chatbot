@@ -7,6 +7,9 @@ export default function SignIn() {
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
 
+  const ENDPOINT = 'https://johntanvu-chatapp.herokuapp.com/';
+  fetch(ENDPOINT);
+
   return (
     <div className='joinOuterContainer'>
       <div className='joinInnerContainer'>
