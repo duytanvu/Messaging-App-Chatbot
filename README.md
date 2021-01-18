@@ -8,7 +8,7 @@ A real-time messaging application built with React, Node.js and Socket.io.
 
 ***
 
-A bot is integrated and can reply based on users' commands.
+A bot is integrated and can asynchronously reply based on users' commands.
 
 **!covid** | give users the latest data about Covid-19 in Canada.
 
@@ -19,3 +19,7 @@ A bot is integrated and can reply based on users' commands.
 ***
   
 **Note**: enter the same room name on different tabs to enter the same group chat.
+
+***
+
+![Demo Image](/images/demo-image.png)
