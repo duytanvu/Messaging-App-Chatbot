@@ -12,9 +12,9 @@ A bot is integrated and can reply based on users' commands.
 
 **!covid** | give users the latest data about Covid-19 in Canada.
 
-**!weather <city>** | fetches and displays the latest weather forecast of the specified city.
+**!weather \<city\>** | fetches and displays the latest weather forecast of the specified city.
   
-**!stock <symbol>** | fetches and displays the latest stock information about the specified company.
+**!stock \<symbol\>** | fetches and displays the latest stock information about the specified company.
   
 ***
   
