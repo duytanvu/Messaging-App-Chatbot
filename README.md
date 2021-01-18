@@ -18,7 +18,7 @@ A bot is integrated and can asynchronously reply based on users' commands.
   
 ***
   
-**Note**: enter the same room name on different tabs to enter the same group chat.
+**Note**: enter the same room name on different browser tabs to enter the same group chat.
 
 ***
 
