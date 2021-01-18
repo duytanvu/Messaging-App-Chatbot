@@ -1,6 +1,6 @@
 # Messaging App with Chatbot.
 
-### Here is the [Live Demo Link](https://johntanvu-chatapp.netlify.app/)
+### Here is the [Live Demo](https://johntanvu-chatapp.netlify.app/)
 
 ***
 
